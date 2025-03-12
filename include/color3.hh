@@ -7,7 +7,7 @@ class Color3
 
 public:
     constexpr Color3() : u(0), v(0), w(0) {}
-    constexpr Color3(double u, double v, double w) : u(u), v(), w(w) {}
+    constexpr Color3(double u, double v, double w) : u(u), v(v), w(w) {}
     constexpr Color3(const Color3 &other) : u(other.u), v(other.v), w(other.w) {}
 
     static Color3 from_rgb(double r, double g, double b)
