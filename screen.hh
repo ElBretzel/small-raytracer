@@ -15,12 +15,12 @@ public:
     Point3 getPixelPosition(int i, int j) const
     {
         // pixel_size have width and height from the image plane (we some kind of scanline)
-        return position + (cameraBasis->getX() * pixel_size * i) - (cameraBasis->getY() * pixel_size * j);
+        return _position + (cameraBasis->getX() * pixel_size * i) - (cameraBasis->getY() * pixel_size * j);
     }
 
     Basis getBasis() const { return *cameraBasis; }
 
-    Point3 getPosition() const { return position; }
+    Point3 getPosition() const { return _position; }
 
     Image &getImage() const { return *image; }
 
@@ -28,16 +28,15 @@ public:
 
     friend std::ostream &operator<<(std::ostream &out, const Screen &s)
     {
-        out << "Screen(" << s.cameraBasis << ", " << s.position << ", " << s.screen_width << ", " << s.screen_height << ", " << s.pixel_size << ")";
+        out << "Screen(" << s.cameraBasis << ", " << s._position << ", " << s.screen_width << ", " << s.screen_height << ", " << s.pixel_size << ")";
         return out;
     }
 
-protected:
+private:
     std::shared_ptr<Basis> cameraBasis;
     std::unique_ptr<Image> image;
 
-private:
-    Point3 position;
+    Point3 _position; // SHOULD NOT BE MODIFIED MANUALLY!!
     double screen_width;
     double screen_height;
     double pixel_size;

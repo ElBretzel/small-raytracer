@@ -8,15 +8,7 @@ class Color3
 public:
     constexpr Color3() : u(0), v(0), w(0) {}
     constexpr Color3(double u, double v, double w) : u(u), v(), w(w) {}
-    constexpr Color3(const Color3 &other) = default;
-
-    Color3 &operator=(const Color3 &other)
-    {
-        u = other.u;
-        v = other.v;
-        w = other.w;
-        return *this;
-    }
+    constexpr Color3(const Color3 &other) : u(other.u), v(other.v), w(other.w) {}
 
     static Color3 from_rgb(double r, double g, double b)
     {
@@ -78,10 +70,10 @@ public:
 
     static const Color3 VOID;
 
-protected:
-    double u;
-    double v;
-    double w;
+private:
+    const double u;
+    const double v;
+    const double w;
 };
 
 constexpr Color3 Color3::VOID = Color3(0, 0, 0);

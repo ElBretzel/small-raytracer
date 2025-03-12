@@ -15,13 +15,12 @@ public:
     virtual Vector3 normal(const Point3 &point) const = 0;
     virtual Color3 getColor() const = 0;
     virtual double getKd() const = 0;
-    virtual void setColor(const Color3 &color) = 0;
 
 protected:
     Object(const Color3 &c, double diffuse_coeff)
         : color(c), kd(diffuse_coeff) {}
 
-    Color3 color;
+    const Color3 color;
     const double kd;
 };
 
@@ -46,11 +45,6 @@ public:
     double getKd() const
     {
         return kd;
-    }
-
-    void setColor(const Color3 &color)
-    {
-        this->color = color;
     }
 
     void setCenter(const Point3 &center)

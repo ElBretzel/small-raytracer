@@ -11,21 +11,10 @@ public:
     constexpr Vector3() : x(0), y(0), z(0) {}
     constexpr Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
     constexpr Vector3(const Vector3 &other) : x(other.x), y(other.y), z(other.z) {}
-    Vector3 &operator=(const Vector3 &other)
-    {
-        x = other.x;
-        y = other.y;
-        z = other.z;
-        return *this;
-    }
 
     double getX() const { return x; }
     double getY() const { return y; }
     double getZ() const { return z; }
-
-    void setX(double x) { this->x = x; }
-    void setY(double y) { this->y = y; }
-    void setZ(double z) { this->z = z; }
 
     Vector3 operator+(const Vector3 &other) const
     {

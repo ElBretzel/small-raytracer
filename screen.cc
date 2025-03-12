@@ -5,7 +5,7 @@ Screen::Screen(const std::shared_ptr<Basis> &basis, int focal_length, double fov
       image(image ? std::move(image) : std::make_unique<Image>(DEFAULT_WIDTH, DEFAULT_ASPECT_RATIO))
 {
     setFov(fov, focal_length);
-    position = cameraBasis->getOrigin() +
+    _position = cameraBasis->getOrigin() +
                (cameraBasis->getZ() * focal_length) +
                (cameraBasis->getY() * (screen_height / 2.0)) -
                (cameraBasis->getX() * (screen_width / 2.0));

@@ -18,6 +18,6 @@ public:
         return out;
     }
 
-protected:
+private:
     double x, y;
 };
