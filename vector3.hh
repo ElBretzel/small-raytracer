@@ -48,12 +48,12 @@ public:
         return Vector3(x / factor, y / factor, z / factor);
     }
 
-    double dot(const Vector3 &other) const
+    inline double dot(const Vector3 &other) const
     {
         return x * other.x + y * other.y + z * other.z;
     }
 
-    Vector3 cross(const Vector3 &other) const
+    inline Vector3 cross(const Vector3 &other) const
     {
         return Vector3(
             y * other.z - z * other.y,
@@ -61,17 +61,17 @@ public:
             x * other.y - y * other.x);
     }
 
-    double length() const
+    inline double length() const
     {
         return sqrt(x * x + y * y + z * z);
     }
 
-    double lengthSquared() const
+    inline double lengthSquared() const
     {
         return x * x + y * y + z * z;
     }
 
-    Vector3 normalize() const
+    inline Vector3 normalize() const
     {
         return *this / length();
     }
@@ -91,6 +91,20 @@ public:
 protected:
     double x, y, z;
 };
+
+
+// Some utility functions for Point3
+// Useful for clearer code
+// Those methods are inlined
+namespace vector3 {
+    inline double dot(const Vector3 &v1, const Vector3 &v2) {
+        return v1.dot(v2);
+    }
+
+    inline double cross(const Vector3 &v1, const Vector3 &v2) {
+        return v1.cross(v2).length();
+    }
+}
 
 const Vector3 Vector3::UP = Vector3(0, 1, 0);
 const Vector3 Vector3::RIGHT = Vector3(1, 0, 0);

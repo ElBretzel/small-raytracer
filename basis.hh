@@ -6,7 +6,6 @@
 
 // Util class to represent a basis in 3D space
 // Very useful for camera and raytracing (+ storing the origin)
-
 class Basis
 {
     public:
@@ -15,21 +14,21 @@ class Basis
         Basis (const Vector3 &x, const Vector3 &y, const Vector3 &z, const Point3 &origin) : x(x), y(y), z(z), origin(origin) {}
         Basis (const Basis &other, const Point3 &origin) : x(other.x), y(other.y), z(other.z), origin(origin) {}
 
-        static Basis fromZ(const Vector3 &z, const Vector3 &other)
+        inline static Basis fromZ(const Vector3 &z, const Vector3 &other)
         {
             Vector3 x = other.cross(z).normalize();
             Vector3 y = z.cross(x).normalize();
             return Basis(x, y, z);
         }
 
-        static Basis fromY(const Vector3 &y, const Vector3 &other)
+        inline static Basis fromY(const Vector3 &y, const Vector3 &other)
         {
             Vector3 x = other.cross(y).normalize();
             Vector3 z = y.cross(x).normalize();
             return Basis(x, y, z);
         }
 
-        static Basis fromX(const Vector3 &x, const Vector3 &other)
+        inline static Basis fromX(const Vector3 &x, const Vector3 &other)
         {
             Vector3 y = other.cross(x).normalize();
             Vector3 z = x.cross(y).normalize();

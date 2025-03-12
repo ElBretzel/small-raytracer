@@ -59,7 +59,7 @@ public:
         // If both root are < 0, the object is behind the camera
         // If one root is == 0, the object is tangent to the camera
         // If two roots are > 0, the object is in front of the camera
-        Point3 root = distance(ray.getOrigin(), root1) < distance(ray.getOrigin(), root2) ? root1 : root2;
+        Point3 root = point3::distance(ray.getOrigin(), root1) < point3::distance(ray.getOrigin(), root2) ? root1 : root2;
         
         hit.point = root;
         hit.normal = normal(hit.point);

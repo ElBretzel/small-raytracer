@@ -38,16 +38,27 @@ public:
         return Point3(getX() / t, getY() / t, getZ() / t);
     }
 
+    inline double distance(const Point3 &other) const
+    {
+        return std::sqrt(std::pow(getX() - other.getX(), 2) + std::pow(getY() - other.getY(), 2) + std::pow(getZ() - other.getZ(), 2));
+    }
+
     const static Point3 ORIGIN;
 };
 
-double distance(const Point3& p1, const Point3& p2) {
-    return std::sqrt(std::pow(p1.getX() - p2.getX(), 2) + std::pow(p1.getY() - p2.getY(), 2) + std::pow(p1.getZ() - p2.getZ(), 2));
+// Some utility functions for Point3
+// Those methods are inlined
+namespace point3
+{
+    inline double distance(const Point3& p1, const Point3& p2) {
+        return std::sqrt(std::pow(p1.getX() - p2.getX(), 2) + std::pow(p1.getY() - p2.getY(), 2) + std::pow(p1.getZ() - p2.getZ(), 2));
+    }
+
+    inline Vector3 construct_vect(const Point3& from, const Point3& to) {
+        return Vector3(to.getX() - from.getX(), to.getY() - from.getY(), to.getZ() - from.getZ());
+    }
 }
 
-Vector3 vect_from_points(Point3 p1, Point3 p2) {
-    return Vector3(p1.getX() - p2.getX(), p1.getY() - p2.getY(), p1.getZ());
-}
 const Point3 Point3::ORIGIN = Point3(0, 0, 0);
 
 #endif

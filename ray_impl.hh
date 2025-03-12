@@ -19,7 +19,7 @@ inline Color3 Ray::cast(const std::vector<std::shared_ptr<Object>> &objects, con
     {
         if (object->intersect(*this, buff))
         {
-            double curr_dist = distance(this->origin, buff.point);
+            double curr_dist = point3::distance(this->origin, buff.point);
             if (curr_dist < closest_dist) {
                 closest = object;
                 closest_dist = curr_dist;
@@ -33,7 +33,7 @@ inline Color3 Ray::cast(const std::vector<std::shared_ptr<Object>> &objects, con
 
     Color3 accumulator = Color3::VOID;
     for (auto &light : lights) {
-        auto light_vect = vect_from_points(best_hit.point, light->getPosition());
+        auto light_vect = point3::construct_vect(best_hit.point, light->getPosition());
         std::cout << closest->getColor().darken(closest->kd * best_hit.normal.dot(light_vect) * light->getIntensity()) << std::endl;
         accumulator = accumulator.blend(closest->getColor().darken(closest->kd * best_hit.normal.dot(light_vect) * light->getIntensity()));
     }
