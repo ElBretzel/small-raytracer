@@ -1,7 +1,5 @@
-#ifndef LIGHT_HH
-#define LIGHT_HH
+#pragma once
 
-#include "color3.hh"
 #include "point3.hh"
 
 class Light
@@ -11,7 +9,9 @@ public:
     virtual double getIntensity() const = 0;
     virtual Point3 getPosition() const = 0;
     virtual void setIntensity(const double &intensity) = 0;
+    virtual void setPosition(const Point3 &position) = 0;
     Light(double intensity) : intensity(intensity) {};
+
 protected:
     double intensity;
 };
@@ -31,5 +31,3 @@ public:
 private:
     Point3 position;
 };
-
-#endif

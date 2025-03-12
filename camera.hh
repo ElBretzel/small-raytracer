@@ -1,21 +1,17 @@
-#ifndef CAMERA_HH
-#define CAMERA_HH
+#pragma once
 
-#include "light.hh"
-#include "object.hh"
 #include "screen.hh"
-#include "ray.hh"
-#include "ray_impl.hh"
-#include "basis.hh"
-
-#include <vector>
 
 #define DEFAULT_FOV 3.14159265359 / 2.0
 #define DEFAULT_FOCAL_LENGTH 1.0
 
+class Object;
+class Light;
+
 class Camera
 {
 public:
+    // Most of these implementations will not be used
     Camera() : basis(std::make_shared<Basis>(Basis::fromZ(Vector3::CAM_DIR, Vector3::UP), Point3::ORIGIN)), screen(std::make_unique<Screen>(this->basis, 1., DEFAULT_FOV)), focal_length(1.)
     {
     }
@@ -53,6 +49,13 @@ public:
         return *basis;
     }
 
+    Screen &getScreen() { return *screen; }
+
+    double getFocalLength() const
+    {
+        return focal_length;
+    }
+
     void setFov(double fov)
     {
         this->fov = fov;
@@ -65,27 +68,7 @@ public:
         screen->setFov(fov, focal_length);
     }
 
-    Screen &getScreen() { return *screen; }
-
-    void render(const std::vector<std::shared_ptr<Object>> objects, const std::vector<std::shared_ptr<Light>> lights)
-    {
-        for (int i = 0; i < screen->getImage().getWidth(); i++)
-        {
-            for (int j = 0; j < screen->getImage().getHeight(); j++)
-            {
-                // Get the pixel position in the WORLD space
-                Vector3 pixelPosition = screen->getPixelPosition(i, j);
-                // Create the ray in the WORLD space. Direction is normalized to have a unit vector (formula is origin + t * direction)
-                Ray ray = Ray(basis->getOrigin(), (pixelPosition - basis->getOrigin()).normalize());
-                // Cast the ray and get the color. Right now cast returns a color
-                screen->getImage().setPixel(Point2(i, j), ray.cast(objects, lights));
-            }
-        }
-    }
-    double getFocalLength() const
-    {
-        return focal_length;
-    }
+    void render(const std::vector<std::shared_ptr<Object>> objects, const std::vector<std::shared_ptr<Light>> lights);
 
     friend std::ostream &operator<<(std::ostream &out, const Camera &c)
     {
@@ -95,11 +78,8 @@ public:
 
 private:
     // Basis can be shared but screen is unique
-    // Bonus point because I do not have to manage memory
     std::shared_ptr<Basis> basis;
     std::unique_ptr<Screen> screen;
     double focal_length = DEFAULT_FOCAL_LENGTH;
     double fov = DEFAULT_FOV;
 };
-
-#endif

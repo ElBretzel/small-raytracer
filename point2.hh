@@ -1,5 +1,4 @@
-#ifndef POINT2_HH
-#define POINT2_HH
+#pragma once
 
 #include <iostream>
 
@@ -22,5 +21,3 @@ public:
 protected:
     double x, y;
 };
-
-#endif

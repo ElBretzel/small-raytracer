@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "light.hh"
+#include "object.hh"
 #include "scene.hh"
 
 #define PI 3.14159265358979323846

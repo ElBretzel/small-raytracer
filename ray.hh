@@ -1,14 +1,13 @@
 #ifndef RAY_HH
 #define RAY_HH
 
-#include "point3.hh"
-#include "vector3.hh"
 #include "color3.hh"
 #include "hit.hh"
 
-#include <vector>
 #include <memory>
+#include <vector>
 
+// Forward declaration to avoid circular dependencies (trust the process)
 class Object;
 class Light;
 

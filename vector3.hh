@@ -1,5 +1,4 @@
-#ifndef VECTOR3_HH
-#define VECTOR3_HH
+#pragma once
 
 #include <cmath>
 #include <iostream>
@@ -9,10 +8,10 @@
 class Vector3
 {
 public:
-    Vector3() : x(0), y(0), z(0) {}
-    Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
-    Vector3(const Vector3 &other) : x(other.x), y(other.y), z(other.z) {}
-    Vector3& operator=(const Vector3 &other)
+    constexpr Vector3() : x(0), y(0), z(0) {}
+    constexpr Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
+    constexpr Vector3(const Vector3 &other) : x(other.x), y(other.y), z(other.z) {}
+    Vector3 &operator=(const Vector3 &other)
     {
         x = other.x;
         y = other.y;
@@ -92,25 +91,25 @@ protected:
     double x, y, z;
 };
 
-
 // Some utility functions for Point3
 // Useful for clearer code
 // Those methods are inlined
-namespace vector3 {
-    inline double dot(const Vector3 &v1, const Vector3 &v2) {
+namespace vector3
+{
+    inline double dot(const Vector3 &v1, const Vector3 &v2)
+    {
         return v1.dot(v2);
     }
 
-    inline double cross(const Vector3 &v1, const Vector3 &v2) {
+    inline double cross(const Vector3 &v1, const Vector3 &v2)
+    {
         return v1.cross(v2).length();
     }
 }
 
-const Vector3 Vector3::UP = Vector3(0, 1, 0);
-const Vector3 Vector3::RIGHT = Vector3(1, 0, 0);
-const Vector3 Vector3::FORWARD = Vector3(0, 0, 1);
-const Vector3 Vector3::CAM_DIR = Vector3(0, 0, 1);
-const Vector3 Vector3::ZERO = Vector3(0, 0, 0);
-const Vector3 Vector3::ONE = Vector3(1, 1, 1);
-
-#endif
+constexpr Vector3 Vector3::UP = Vector3(0, 1, 0);
+constexpr Vector3 Vector3::RIGHT = Vector3(1, 0, 0);
+constexpr Vector3 Vector3::FORWARD = Vector3(0, 0, 1);
+constexpr Vector3 Vector3::CAM_DIR = Vector3(0, 0, 1);
+constexpr Vector3 Vector3::ZERO = Vector3(0, 0, 0);
+constexpr Vector3 Vector3::ONE = Vector3(1, 1, 1);

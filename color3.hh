@@ -1,52 +1,73 @@
-#ifndef COLOR3_HH
-#define COLOR3_HH
+#pragma once
 
-#include "vector3.hh"
+#include <iostream>
 
-class Color3 : public Vector3
+class Color3
 {
 
 public:
-    Color3() : Vector3() {}
-    Color3(const Vector3 &v) : Vector3(v) {}
-    Color3(double u, double v, double w) : Vector3(u, v, w) {}
-    Color3(const Color3 &other) = default;
+    constexpr Color3() : u(0), v(0), w(0) {}
+    constexpr Color3(double u, double v, double w) : u(u), v(), w(w) {}
+    constexpr Color3(const Color3 &other) = default;
 
+    Color3 &operator=(const Color3 &other)
+    {
+        u = other.u;
+        v = other.v;
+        w = other.w;
+        return *this;
+    }
 
     static Color3 from_rgb(double r, double g, double b)
     {
         return Color3(r / 255., g / 255., b / 255.);
     }
 
-    int r() const { return (int)(255.999 * x); }
-    int g() const { return (int)(255.999 * y); }
-    int b() const { return (int)(255.999 * z); }
+    int r() const { return (int)(255.999 * u); }
+    int g() const { return (int)(255.999 * v); }
+    int b() const { return (int)(255.999 * w); }
 
-    Color3 clamp() const
+    inline Color3 clamp() const
     {
         return Color3(
-            x > 1. ? 1. : x < 0. ? 0.
-                                 : x,
-            y > 1. ? 1. : y < 0. ? 0.
-                                 : y,
-            z > 1. ? 1. : z < 0. ? 0.
-                                 : z);
+            u > 1. ? 1. : u < 0. ? 0.
+                                 : u,
+            v > 1. ? 1. : v < 0. ? 0.
+                                 : v,
+            w > 1. ? 1. : w < 0. ? 0.
+                                 : w);
     }
 
-    Color3 blend(const Color3 &other) const
+    Color3 operator+(const Color3 &other) const
     {
         return Color3(
-            x * other.x,
-            y * other.y,
-            z * other.z);
+            u + other.u,
+            v + other.v,
+            w + other.w);
     }
 
-    Color3 darken(double factor) const
+    Color3 operator+=(const Color3 &other)
     {
         return Color3(
-            x * factor,
-            y * factor,
-            z * factor);
+            u + other.u,
+            v + other.v,
+            w + other.w);
+    }
+
+    Color3 operator-(const Color3 &other) const
+    {
+        return Color3(
+            u - other.u,
+            v - other.v,
+            w - other.w);
+    }
+
+    Color3 operator*(double factor) const
+    {
+        return Color3(
+            u * factor,
+            v * factor,
+            w * factor);
     }
 
     friend std::ostream &operator<<(std::ostream &out, const Color3 &c)
@@ -55,9 +76,12 @@ public:
         return out;
     }
 
-    const static Color3 VOID;
+    static const Color3 VOID;
+
+protected:
+    double u;
+    double v;
+    double w;
 };
 
-const Color3 Color3::VOID = Color3(0, 0, 0);
-
-#endif
+constexpr Color3 Color3::VOID = Color3(0, 0, 0);
