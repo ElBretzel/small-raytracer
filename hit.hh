@@ -12,6 +12,7 @@ public:
     Vector3 normal;
     double scalar;
 
+
     friend std::ostream &operator<<(std::ostream &os, const Hit &hit)
     {
         os << "Hit(" << hit.point << ", " << hit.normal << ", " << hit.scalar << ")";

@@ -12,6 +12,7 @@ public:
     Color3(double u, double v, double w) : Vector3(u, v, w) {}
     Color3(const Color3 &other) = default;
 
+
     static Color3 from_rgb(double r, double g, double b)
     {
         return Color3(r / 255., g / 255., b / 255.);

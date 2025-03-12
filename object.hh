@@ -16,21 +16,24 @@ public:
     virtual Vector3 normal(const Point3 &point) const = 0;
 
     virtual Color3 getColor() const = 0;
+    const double kd;
 
 protected:
-    const Color3 color;
+    Object(const Color3& c, double diffuse_coeff)
+    : color(c), kd(diffuse_coeff) {}
+    Color3 color;
 };
 
 class Sphere : public Object
 {
 public:
     Sphere(const Point3 &center, double radius, const Color3 &color)
-        : center(center), radius(radius), color(color)
+        : Object(color, 0.5), center(center), radius(radius)
     {
     }
 
     Sphere(const Point3 &center, double radius)
-        : center(center), radius(radius), color(Color3(1, 1, 1))
+    : Object(Color3(1,1,1), 0.5), center(center), radius(radius)
     {
     }
 
@@ -51,23 +54,14 @@ public:
 
         double sqrtd = sqrt(discriminant);
 
-        double root = (b - sqrtd) / (2 * a);
+        Point3 root1 = ray.at((b - sqrtd) / (2 * a));
+        Point3 root2 = ray.at((-b + sqrtd) / (2 * a));
         // If both root are < 0, the object is behind the camera
         // If one root is == 0, the object is tangent to the camera
         // If two roots are > 0, the object is in front of the camera
-
-        if (root <= Ray::MIN || root >= Ray::MAX)
-        {
-            // Other root can be valid
-            root = (-b + sqrtd) / (2 * a);
-            if (root <= Ray::MIN || root >= Ray::MAX)
-            {
-                return false;
-            }
-        }
+        Point3 root = distance(ray.getOrigin(), root1) < distance(ray.getOrigin(), root2) ? root1 : root2;
         
-        hit.scalar = root;
-        hit.point = ray.at(root);
+        hit.point = root;
         hit.normal = normal(hit.point);
 
         return true;
@@ -101,7 +95,6 @@ public:
 private:
     Point3 center;
     double radius;
-    Color3 color;
 };
 
 #endif
