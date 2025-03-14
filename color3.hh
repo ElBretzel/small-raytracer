@@ -41,6 +41,14 @@ public:
             z * other.z);
     }
 
+    Color3 add(const Color3 &other) const
+    {
+        return Color3(
+            x + other.x,
+            y + other.y,
+            z + other.z).clamp();
+    }
+
     Color3 darken(double factor) const
     {
         return Color3(
