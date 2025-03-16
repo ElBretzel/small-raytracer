@@ -78,7 +78,8 @@ public:
                 // Create the ray in the WORLD space. Direction is normalized to have a unit vector (formula is origin + t * direction)
                 Ray ray = Ray(basis->getOrigin(), (pixelPosition - basis->getOrigin()).normalize());
                 // Cast the ray and get the color. Right now cast returns a color
-                screen->getImage().setPixel(Point2(i, j), ray.cast(objects, lights));
+                Color3 col = ray.cast(objects, lights);
+                screen->getImage().setPixel(Point2(i, j), col);
             }
         }
     }

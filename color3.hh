@@ -57,6 +57,13 @@ public:
             z * factor);
     }
 
+    Color3 to_ps2(int module) {
+        std::cout << (int)z << std::endl;
+        std::cout << (int)z % module << std::endl;
+        std::cout << b() - b() % module << std::endl;
+        return from_rgb(r() - r() % module, g() - g() % module, b() - b() % module);
+    }
+
     friend std::ostream &operator<<(std::ostream &out, const Color3 &c)
     {
         out << "{" << c.r() << ", " << c.g() << ", " << c.b() << "}";

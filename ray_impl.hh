@@ -34,9 +34,7 @@ inline Color3 Ray::cast(const std::vector<std::shared_ptr<Object>> &objects, con
     Color3 accumulator = Color3::VOID;
     for (auto &light : lights) {
         auto light_vect = vect_from_points(best_hit.point, light->getPosition());
-        std::cout << closest->getColor().darken(closest->kd * best_hit.normal.normalize().dot(light_vect.normalize()) * light->getIntensity()) << std::endl;
         accumulator = accumulator.add(closest->getColor().darken(closest->kd * best_hit.normal.normalize().dot(light_vect.normalize()) * light->getIntensity()));
-        std::cout << accumulator << std::endl;
     }
     return accumulator;
 }
