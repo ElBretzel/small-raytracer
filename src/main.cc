@@ -26,7 +26,7 @@ int main(void)
     auto sphere2 = std::make_shared<Sphere>(Point3(0, 1, 2), radius, green);
     auto sphere3 = std::make_shared<Sphere>(Point3(5, -3, 10), radius, blue);
 
-    auto light1 = std::make_shared<PointLight>(Point3(0, 0, 0), 1);
+    auto light1 = std::make_shared<PointLight>(Point3(-1, 0, 0), 0.5);
     Scene scene(std::move(camera));
     scene.addObject(sphere1);
     scene.addObject(sphere2);

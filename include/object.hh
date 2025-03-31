@@ -15,25 +15,29 @@ public:
     virtual Vector3 normal(const Point3 &point) const = 0;
     virtual Color3 getColor() const = 0;
     virtual double getKd() const = 0;
+    virtual double getKs() const = 0;
+    virtual double getNs() const = 0;
 
 protected:
-    Object(const Color3 &c, double diffuse_coeff)
-        : color(c), kd(diffuse_coeff) {}
+    Object(const Color3 &c, double diffuse_coeff, double speculative_coeff, double ns)
+        : color(c), kd(diffuse_coeff), ks(speculative_coeff), ns(ns) {}
 
     const Color3 color;
     const double kd;
+    const double ks;
+    const double ns;
 };
 
 class Sphere : public Object
 {
 public:
     Sphere(const Point3 &center, double radius, const Color3 &color)
-        : Object(color, 0.5), center(center), radius(radius)
+        : Object(color, 0.8, 0.8, 128), center(center), radius(radius)
     {
     }
 
     Sphere(const Point3 &center, double radius)
-        : Object(Color3(1, 1, 1), 0.5), center(center), radius(radius)
+        : Object(Color3(1, 1, 1), 0.8, 0.8, 128), center(center), radius(radius)
     {
     }
 
@@ -45,6 +49,14 @@ public:
     double getKd() const
     {
         return kd;
+    }
+
+    double getKs() const {
+        return ks;
+    }
+
+    double getNs() const {
+        return ns;
     }
 
     void setCenter(const Point3 &center)

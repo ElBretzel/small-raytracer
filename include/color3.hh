@@ -71,6 +71,7 @@ public:
 
 
     static const Color3 VOID;
+    static const Color3 AETHER;
 
 private:
     double u;
@@ -79,3 +80,4 @@ private:
 };
 
 constexpr Color3 Color3::VOID = Color3(0, 0, 0);
+constexpr Color3 Color3::AETHER = Color3(1, 1, 1);
