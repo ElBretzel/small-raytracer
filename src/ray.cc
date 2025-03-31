@@ -29,7 +29,7 @@ Color3 Ray::cast(const std::vector<std::shared_ptr<Object>> &objects, const std:
     for (const auto &light : lights)
     {
         auto light_vect = point3::construct_vect(best_hit.point, light->getPosition());
-        accumulator += closest->getColor() * closest->getKd() * best_hit.normal.dot(light_vect) * light->getIntensity();
+        accumulator += closest->getColor() * closest->getKd() * best_hit.normal.dot(light_vect.normalize()) * light->getIntensity();
     }
     return accumulator;
 }

@@ -68,6 +68,17 @@ public:
         return out;
     }
 
+    
+    Color3 add(const Color3 &other) const
+
+
+    {
+        return Color3(
+            x + other.x,
+            y + other.y,
+            z + other.z).clamp();
+    }
+
     static const Color3 VOID;
 
 private:
