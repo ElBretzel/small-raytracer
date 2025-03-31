@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(RayTracer)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic -Werror -flto -O2 -march=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -g")
 
 set(SRC_FILES src/camera.cc src/image.cc src/main.cc src/ray.cc src/screen.cc src/sphere.cc)
 include_directories(include)
