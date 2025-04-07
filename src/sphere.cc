@@ -31,5 +31,8 @@ bool Sphere::intersect(const Ray &ray, Hit &hit)
     hit.point = closest_hit;
     hit.normal = normal(hit.point);
 
+    // check if hits in the right direction
+    if ((hit.point.getX() - ray.getOrigin().getX()) / ray.getDirection().getX() < 0)
+        return false;
     return true;
 }

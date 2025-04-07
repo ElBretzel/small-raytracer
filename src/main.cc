@@ -9,7 +9,7 @@
 int main(void)
 {
     auto fov = PI / 2.0;
-    auto width = 800;
+    auto width = 2000;
     auto aspect_ratio = 16.0 / 9.0;
     auto focal_length = 1.0;
 
@@ -22,18 +22,18 @@ int main(void)
 
     auto radius = 1.0;
 
-    auto sphere1 = std::make_shared<Sphere>(Point3(-0, 0, 20), radius, red);
-    auto sphere2 = std::make_shared<Sphere>(Point3(0, 1, 2), radius, green);
-    auto sphere3 = std::make_shared<Sphere>(Point3(5, -3, 10), radius, blue);
+    auto sphere2 = std::make_shared<Sphere>(Point3(1, 1, 8), radius, red);
+    auto sphere3 = std::make_shared<Sphere>(Point3(-1, 1, 4), radius, green);
 
-    auto light1 = std::make_shared<PointLight>(Point3(-1, 0, 0), 0.5);
+    auto light1 = std::make_shared<PointLight>(Point3(0, 0, 0), 0.5);
+    auto light2 = std::make_shared<PointLight>(Point3(-8, 3, 0), 0.5);
     Scene scene(std::move(camera));
-    scene.addObject(sphere1);
     scene.addObject(sphere2);
     scene.addObject(sphere3);
     scene.addLight(light1);
+    //scene.addLight(light2);
 
-    scene.render();
+    scene.render(3);
     scene.save_to_ppm("output.ppm");
 
     return 0;

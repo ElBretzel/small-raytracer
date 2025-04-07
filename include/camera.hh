@@ -68,7 +68,7 @@ public:
         screen->setFov(fov, focal_length);
     }
 
-    void render(const std::vector<std::shared_ptr<Object>> objects, const std::vector<std::shared_ptr<Light>> lights);
+    void render(const std::vector<std::shared_ptr<Object>> objects, const std::vector<std::shared_ptr<Light>> lights, int max_render_iter);
 
     friend std::ostream &operator<<(std::ostream &out, const Camera &c)
     {

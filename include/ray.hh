@@ -25,7 +25,7 @@ public:
         return origin + direction * t;
     }
 
-    Color3 cast(const std::vector<std::shared_ptr<Object>> &objects, const std::vector<std::shared_ptr<Light>> &lights) const;
+    Color3 cast(const std::vector<std::shared_ptr<Object>> &objects, const std::vector<std::shared_ptr<Light>> &lights, int max_iteration, int current_iteration,  int current_index=-1) const;
 
     friend std::ostream &operator<<(std::ostream &out, const Ray &r)
     {
